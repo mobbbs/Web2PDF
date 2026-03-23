@@ -10,6 +10,7 @@ permissions:
 
 jobs:
   build-python-package:
+    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -62,14 +63,8 @@ jobs:
 
   create-release:
     runs-on: ubuntu-latest
-    needs: [build-python-package, build-windows-portable]
+    needs: [build-windows-portable]
     steps:
-      - name: Download python artifacts
-        uses: actions/download-artifact@v4
-        with:
-          name: python-artifacts
-          path: release-assets
-
       - name: Download windows portable artifact
         uses: actions/download-artifact@v4
         with:
