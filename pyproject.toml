@@ -1,10 +1,10 @@
-[build-system]
+﻿[build-system]
 requires = ["setuptools>=75.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
 name = "url2pdf-ai-reader"
-version = "0.1.0"
+version = "0.1.1"
 description = "Convert URL content to AI-friendly PDF with FastAPI and Playwright."
 readme = "README.md"
 requires-python = ">=3.11"
@@ -29,3 +29,4 @@ url2pdf-run = "app.interactive:main"
 
 [tool.setuptools]
 packages = ["app"]
+
