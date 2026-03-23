@@ -17,7 +17,7 @@ python -m pip install -r requirements.txt
 python -m pip install pyinstaller
 python -m playwright install chromium
 
-pyinstaller `
+python -m PyInstaller `
   --noconfirm `
   --onefile `
   --name url2pdf-run `
@@ -34,6 +34,10 @@ if (-not (Test-Path $browserSource)) {
 }
 
 Copy-Item $browserSource "$BundleRoot\ms-playwright" -Recurse
+
+if (-not (Test-Path "$BundleRoot\url2pdf-run.exe")) {
+  throw "Portable exe was not created: $BundleRoot\url2pdf-run.exe"
+}
 
 Compress-Archive -Path "$BundleRoot\*" -DestinationPath "$ReleaseRoot\url2pdf-ai-reader-$Version-windows-x64.zip" -Force
 
