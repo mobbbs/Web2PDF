@@ -35,3 +35,7 @@ def main() -> None:
         except Exception as exc:  # noqa: BLE001
             print(f"Failed: {exc}")
             print("Tip: run 'python -m playwright install chromium' once if not installed.")
+
+
+if __name__ == "__main__":
+    main()
