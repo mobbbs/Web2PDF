@@ -63,8 +63,23 @@ Workflow will:
 
 - Build `sdist` and `wheel`
 - Create a source zip
+- Build Windows portable package (`url2pdf-run.exe` + bundled Chromium)
 - Create GitHub Release
 - Upload build artifacts to the Release page
+
+## Use Release Directly (No Python Needed)
+
+From GitHub Release assets, download:
+
+- `url2pdf-ai-reader-vX.Y.Z-windows-x64.zip`
+
+Then:
+
+1. Unzip
+2. Double-click `start-url2pdf.bat`
+3. Terminal opens and asks for URL
+4. Paste URL and press Enter
+5. PDF is generated in the current folder under `output/`
 
 ## Release Command (PowerShell)
 

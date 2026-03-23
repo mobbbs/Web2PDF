@@ -25,6 +25,7 @@ Repository = "https://github.com/REPLACE_ME/url2pdf-ai-reader"
 
 [project.scripts]
 url2pdf-api = "app.cli:main"
+url2pdf-run = "app.interactive:main"
 
 [tool.setuptools]
 packages = ["app"]

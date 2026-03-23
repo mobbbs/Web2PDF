@@ -5,3 +5,5 @@ output/
 dist/
 build/
 *.egg-info/
+release/
+*.spec

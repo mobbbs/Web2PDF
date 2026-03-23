@@ -1,6 +1,8 @@
 import asyncio
 import hashlib
+import os
 import re
+import sys
 from pathlib import Path
 from urllib.parse import urlparse
 
@@ -21,6 +23,17 @@ def _safe_filename(text: str, fallback: str = "document") -> str:
 
 def _url_hash(url: str) -> str:
     return hashlib.sha256(url.encode("utf-8")).hexdigest()[:12]
+
+
+def _configure_playwright_browser_path() -> None:
+    if os.getenv("PLAYWRIGHT_BROWSERS_PATH"):
+        return
+
+    if getattr(sys, "frozen", False):
+        exe_dir = Path(sys.executable).resolve().parent
+        bundled = exe_dir / "ms-playwright"
+        if bundled.exists():
+            os.environ["PLAYWRIGHT_BROWSERS_PATH"] = str(bundled)
 
 
 def _extract_article_html(raw_html: str) -> tuple[str, str | None]:
@@ -115,6 +128,7 @@ async def convert_url_to_pdf(
     wait_until: str = "networkidle",
     timeout_ms: int = 90000,
 ) -> tuple[str, str | None]:
+    _configure_playwright_browser_path()
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     parsed = urlparse(url)
     slug = _safe_filename(parsed.path.split("/")[-1] or parsed.netloc, "page")
